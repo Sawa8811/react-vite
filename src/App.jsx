@@ -1,3 +1,5 @@
+import "./i18n";
+import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 import "./style.css";
 import { Github, Instagram, Mail, MapPin } from "lucide-react";
@@ -8,6 +10,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 
 
 export default function App() {
+  const { t, i18n } = useTranslation();
   const [page, setPage] = useState("home");
   const [message, setMessage] = useState("");
 
@@ -37,12 +40,12 @@ export default function App() {
           <>
             <div className="profile">
               <div className="intro">
-                <h1 className="highlight">ようこそ</h1>
+                <h1 className="highlight">{t("welcome")}</h1>
                 <div className="name-block">
                   <h2><strong>ChingTse Ho</strong></h2>
                   <p className="aka">a.k.a Sawa</p>
                 </div>
-                <p className="role">Full-Stack Engineer</p>
+                <p className="role">{t("role")}</p>
                 <a
                   href="https://www.google.com/maps/place/Tokyo,+Japan"
                   target="_blank"
@@ -51,7 +54,7 @@ export default function App() {
                   style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
                 >
                   <MapPin size={16} />
-                  Based in Tokyo, Japan
+                  {t("based")}
                 </a>
               </div>
 
@@ -141,26 +144,25 @@ export default function App() {
 
             <div className="about-content">
               <div className="about-left">
-                <h3 style={{ textAlign: "center" }}>自己紹介</h3>
+                <h3 style={{ textAlign: "center" }}>{t("about_title")}</h3>
                 <div style={{ textAlign: "left", margin: "1.5rem 0 0 0", lineHeight: "2" }}>
-                  <b>東京在住のフルスタックエンジニアSawaです。</b><br />
-                  台湾生まれ。<br />
-                  <span style={{ color: "#62a6f7", fontWeight: 600 }}>Java / React / クラウド</span>を使った開発に日々挑戦中。<br />
+                  <b>{t("about_intro_bold")}</b><br />
+                  {t("about_intro_birth")}<br />
+                  <span style={{ color: "#62a6f7", fontWeight: 600 }}>{t("about_intro_skills")}</span><br />
                   <br />
                   <span style={{ fontStyle: "italic", color: "#aaa" }}>
-                    「誰かの毎日をちょっと便利にする」<br />
-                    そんなシステム作りが大好き。
+                    {t("about_intro_love")}
                   </span><br />
                   <br />
-                  仕事も趣味も全力投球。<br />
-                  <span style={{ color: "#e5c39a" }}>音楽（クラシック・J-Pop）</span>、ゲーム、映画も楽しんでいます。
+                  {t("about_intro_work_hobby")}<br />
+                  <span style={{ color: "#e5c39a" }}>{t("about_intro_hobby")}</span>{t("about_intro_hobby_extra")}
                 </div>
               </div>
               <div className="about-right">
-                <h3 style={{ textAlign: "center", marginBottom: "1.2em" }}>経歴・資格</h3>
+                <h3 style={{ textAlign: "center", marginBottom: "1.2em" }}>{t("career_title")}</h3>
 
                 <div className="career-block">
-                  <div className="career-title">学歴・職歴</div>
+                  <div className="career-title">{t("career_education_work")}</div>
                   <ul>
                     <li>
                       2018年 台湾桃園陽明高校 卒業
@@ -182,7 +184,7 @@ export default function App() {
                 </div>
 
                 <div className="career-block">
-                  <div className="career-title">資格・スキル</div>
+                  <div className="career-title">{t("career_certifications_skills")}</div>
                   <ul>
                     <li>TOEIC 600</li>
                     <li>
@@ -199,7 +201,7 @@ export default function App() {
         {/* --- Projects 頁面 --- */}
         {page === "projects" && (
           <section className="projects-section" id="projects">
-            <p className="project-intro">作品集</p>
+            <p className="project-intro">{t("projects_title")}</p>
             <div className="project-cards">
               {filteredProjects.map((project, idx) => (
                 <a
@@ -230,40 +232,40 @@ export default function App() {
         {/* --- message 頁面 --- */}
         {page === "message" && (
           <section className="about-section" id="message">
-            <h2>Message Board</h2>
+            <h2>{t("message_title")}</h2>
             <div className="message-container">
               <div className="message-form">
                 <label>
-                  ニックネーム（任意）:
-                  <input type="text" placeholder="匿名で投稿可能" className="message-input" />
+                  {t("message_nickname")}:
+                  <input type="text" placeholder={t("message_nickname_placeholder")} className="message-input" />
                 </label>
                 <label>
-                  メッセージ（500字以内）:
+                  {t("message_content")}:
                   <div style={{ position: "relative" }}>
                     <textarea
                       className="message-textarea"
                       maxLength={500}
                       rows={6}
-                      placeholder="メッセージを入力してください"
+                      placeholder={t("message_content_placeholder")}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                     />
                   </div>
                 </label>
                 <div className="message-toggle">
-                  <span>公開</span>
+                  <span>{t("message_public")}</span>
                   <label className="toggle-switch">
                     <input type="checkbox" id="toggleVisibility" />
                     <span className="slider"></span>
                   </label>
                 </div>
-                <button className="message-submit">送信</button>
+                <button className="message-submit">{t("message_submit")}</button>
               </div>
               <div className="message-messages">
-                <h3>メッセージ一覧</h3>
+                <h3>{t("message_list_title")}</h3>
                 <div className="messages-scroll">
                   <div className="message-card">
-                    <p><strong>匿名</strong>: こんにちは！素敵なサイトですね！</p>
+                    <p><strong>{t("message_anonymous")}</strong>: こんにちは！素敵なサイトですね！</p>
                   </div>
                   <div className="message-card">
                     <p><strong>someone</strong>: Javaのプロジェクト見ました、参考になります。</p>
@@ -299,31 +301,47 @@ export default function App() {
         )}
       </main>
 
+      <div
+        className="language-switcher"
+        style={{
+          position: 'fixed',
+          left: 32,
+          bottom: 86,
+          zIndex: 100,
+          display: 'flex',
+          gap: '0.5rem'
+        }}
+      >
+        <button onClick={() => i18n.changeLanguage('ja')}>日本語</button>
+        <button onClick={() => i18n.changeLanguage('zh')}>中文</button>
+        <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+      </div>
+
       {/* === 導覽列 Navigation === */}
       <nav className="navbar">
         <ul className="nav-links">
           <li>
             <a href="#home" onClick={e => { e.preventDefault(); setPage("home"); }}>
               <HomeIcon style={{ verticalAlign: 'middle', marginRight: 6 }} />
-              Home
+              {t("nav_home")}
             </a>
           </li>
           <li>
             <a href="#about" onClick={e => { e.preventDefault(); setPage("about"); }}>
               <AccountCircleIcon style={{ verticalAlign: 'middle', marginRight: 6 }} />
-              About Me
+              {t("nav_about")}
             </a>
           </li>
           <li>
             <a href="#projects" onClick={e => { e.preventDefault(); setPage("projects"); }}>
               <FolderIcon style={{ verticalAlign: 'middle', marginRight: 6 }} />
-              Projects
+              {t("nav_projects")}
             </a>
           </li>
           <li>
             <a href="#message" onClick={e => { e.preventDefault(); setPage("message"); }}>
               <ChatIcon style={{ verticalAlign: 'middle', marginRight: 6 }} />
-              message
+              {t("nav_message")}
             </a>
           </li>
         </ul>

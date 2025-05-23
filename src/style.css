@@ -1,4 +1,4 @@
-/ * =============================
+/* =============================
    1. 基本設定（html, body, .container 等全域/排版）
    ============================= */
 html {
@@ -107,6 +107,7 @@ body {
   padding: 2rem;
   padding-top: 6rem;
   padding-bottom: 4rem;
+  position: relative; /* ← 新增這行 */
 }
 
 /* =============================
@@ -586,4 +587,29 @@ body {
   top: 0;
   background: #1e1e1e;
   z-index: 2;
+}
+.language-switcher {
+  background: rgba(30,30,32,0.7);
+  border-radius: 8px;
+  padding: 0.2rem 1rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.14);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.language-switcher button {
+  background: none;
+  border: none;
+  color: #4f9df9;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 0.1rem 0.6rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.language-switcher button:hover {
+  background: #223b6d;
+  color: #fff;
 }
