@@ -9,13 +9,29 @@ import ChatIcon from '@mui/icons-material/Chat';
 
 export default function App() {
   const [page, setPage] = useState("home");
+
+  const allProjects = [
+    {
+      title: "UserLogin",
+      desc: "使用者登入システム",
+      tags: ["Spring-Boot", "Thymeleaf", "MyBatis-Plus", "MySQL", "Java"],
+      url: "https://github.com/Sawa8811/UserLogin"
+    },
+    /*
+      可以在這邊新增專案
+    */
+  ];
+
+  const filteredProjects = allProjects;
   return (
     <div className="container">
       <header className="header">
         <div className="logo">{"<Sawa />"}</div>
       </header>
 
+      {/* === Home 分頁內容 === */}
       <main className="main" id="home">
+        {/* --- Home 頁面 --- */}
         {page === "home" && (
           <>
             <div className="profile">
@@ -118,6 +134,7 @@ export default function App() {
           </>
         )}
 
+        {/* --- About Me 頁面 --- */}
         {page === "about" && (
           <section className="about-section" id="about">
 
@@ -178,13 +195,38 @@ export default function App() {
           </section>
         )}
 
+        {/* --- Projects 頁面 --- */}
         {page === "projects" && (
-          <section className="about-section" id="projects">
-            <h2>Projects</h2>
-            <p>（ここにプロジェクト紹介文を追加予定）</p>
+          <section className="projects-section" id="projects">
+            <p className="project-intro">作品集</p>
+            <div className="project-cards">
+              {filteredProjects.map((project, idx) => (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-card"
+                  key={idx}
+                >
+                  <h3>{project.title}</h3>
+                  <p>{project.desc}</p>
+                  <img
+                    src={project.image || "/userLogin.png"}
+                    alt={`${project.title} UserLogin`}
+                    className="userLogin-image"
+                  />
+                  <div className="tech-tags">
+                    {project.tags.map(tag => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                </a>
+              ))}
+            </div>
           </section>
         )}
 
+        {/* --- Contact 頁面 --- */}
         {page === "contact" && (
           <section className="about-section" id="contact">
             <h2>Contact</h2>
@@ -193,6 +235,7 @@ export default function App() {
         )}
       </main>
 
+      {/* === 導覽列 Navigation === */}
       <nav className="navbar">
         <ul className="nav-links">
           <li>
@@ -222,6 +265,7 @@ export default function App() {
         </ul>
       </nav>
 
+      {/* === 頁尾 Footer === */}
       <footer className="footer">
         <p>© 2025 Sawa Ho | All rights reserved.</p>
       </footer>
