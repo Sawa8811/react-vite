@@ -9,6 +9,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 
 export default function App() {
   const [page, setPage] = useState("home");
+  const [message, setMessage] = useState("");
 
   const allProjects = [
     {
@@ -226,11 +227,74 @@ export default function App() {
           </section>
         )}
 
-        {/* --- Contact 頁面 --- */}
-        {page === "contact" && (
-          <section className="about-section" id="contact">
-            <h2>Contact</h2>
-            <p>（ここに連絡先やフォームなど追加予定）</p>
+        {/* --- message 頁面 --- */}
+        {page === "message" && (
+          <section className="about-section" id="message">
+            <h2>Message Board</h2>
+            <div className="message-container">
+              <div className="message-form">
+                <label>
+                  ニックネーム（任意）:
+                  <input type="text" placeholder="匿名で投稿可能" className="message-input" />
+                </label>
+                <label>
+                  メッセージ（500字以内）:
+                  <div style={{ position: "relative" }}>
+                    <textarea
+                      className="message-textarea"
+                      maxLength={500}
+                      rows={6}
+                      placeholder="メッセージを入力してください"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                    />
+                  </div>
+                </label>
+                <div className="message-toggle">
+                  <span>公開</span>
+                  <label className="toggle-switch">
+                    <input type="checkbox" id="toggleVisibility" />
+                    <span className="slider"></span>
+                  </label>
+                </div>
+                <button className="message-submit">送信</button>
+              </div>
+              <div className="message-messages">
+                <h3>メッセージ一覧</h3>
+                <div className="messages-scroll">
+                  <div className="message-card">
+                    <p><strong>匿名</strong>: こんにちは！素敵なサイトですね！</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>someone</strong>: Javaのプロジェクト見ました、参考になります。</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>Yuki</strong>: Sawaさんの技術ブログ、分かりやすいです！</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>小林</strong>: 很棒的作品！加油！</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>John</strong>: Your project looks cool!</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>美咲</strong>: Reactのサンプルが役に立ちました！</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>Takashi</strong>: Spring Bootの実装参考になりました。</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>小王</strong>: 想請問怎麼串接MyBatis？</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>Anna</strong>: UI好美，想學習看看</p>
+                  </div>
+                  <div className="message-card">
+                    <p><strong>健太</strong>: お疲れ様です！これからも応援します！</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
         )}
       </main>
@@ -257,9 +321,9 @@ export default function App() {
             </a>
           </li>
           <li>
-            <a href="#contact" onClick={e => { e.preventDefault(); setPage("contact"); }}>
+            <a href="#message" onClick={e => { e.preventDefault(); setPage("message"); }}>
               <ChatIcon style={{ verticalAlign: 'middle', marginRight: 6 }} />
-              Contact
+              message
             </a>
           </li>
         </ul>
