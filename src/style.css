@@ -1,0 +1,308 @@
+/* =============================
+   1. 基本設定（html, body, .container 等全域/排版）
+   ============================= */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+/* =============================
+   2. Header（header, logo 等）
+   ============================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #111;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 1000;
+}
+.logo {
+  font-weight: bold;
+  color: #4f9df9;
+  font-size: 1.2rem;
+  margin-right: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+/* =============================
+   3. Footer（footer/copyright）
+   ============================= */
+.footer {
+  position: fixed;
+  right: 2vw;
+  bottom: 2vh;
+  background-color: transparent;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.95rem;
+  color: #888;
+  z-index: 1200;
+  border-radius: 6px;
+  pointer-events: none; /* 不影響底下navbar點擊 */
+}
+
+/* =============================
+   4. Navbar（.navbar, .nav-links, 相關）
+   ============================= */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #121212;
+  border-top: 1px solid #333;
+  padding: 0.5rem 0;
+  z-index: 999;
+  text-align: center;
+}
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.nav-links li a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: bold;
+}
+.nav-links li a:hover {
+  color: #4f9df9;
+}
+
+/* =============================
+   5. Main 區域（.main）
+   ============================= */
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+/* =============================
+   6. Profile/Home 區塊（.profile, .intro, .photo, .avatar, .name-block, .aka, .subtext, .icons, .highlight）
+   ============================= */
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.intro {
+  text-align: left;
+  max-width: 420px;
+}
+.intro h1, .intro h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+.photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ccc;
+  margin-top: 1rem;
+}
+.name-block {
+  position: relative;
+  display: inline-block;
+}
+.aka {
+  position: absolute;
+  bottom: -1.2rem;
+  right: 0;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+.subtext {
+  color: #aaa;
+}
+.icons {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.icons a:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
+.highlight {
+  color: #4f9df9;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* =============================
+   7. Skills 區塊（.skills-section, .skills-list, .skill-icon 等）
+   ============================= */
+.skills-section {
+  margin-top: 4rem;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  max-width: 1000px;
+  width: 90%;
+}
+.skills-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-align: center;
+}
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+.skill-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+.skill-icon img {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 0.4rem;
+}
+.skill-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+  transition: all 0.2s ease;
+}
+
+/* =============================
+   8. About Me 區塊（.about-content, .about-left, .about-right, .career-block, .career-title, .highlight-paren 等）
+   ============================= */
+.about-content {
+  display: flex;
+  gap: 6rem;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1600px;
+  margin: 2rem auto;
+}
+.about-left, .about-right {
+  flex: 1 1 0;
+  min-width: 260px;
+  background: rgba(30,32,36,0.95);
+  box-shadow: 0 4px 24px 0 rgba(30,32,36,0.15);
+  border-radius: 8px;
+  padding: 2rem;
+}
+.about-left {
+  margin-right: 1rem;
+  font-size: 1.13em;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+.about-left .highlight {
+  color: #4f9df9;
+  font-weight: bold;
+  font-size: 1.15em;
+}
+.about-left .music {
+  color: #ffd366;
+  font-weight: bold;
+  font-size: 1.09em;
+  letter-spacing: 0.04em;
+}
+.about-right {
+  margin-left: 1rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  background: transparent;
+}
+.career-block {
+  margin-bottom: 1.5em;
+}
+.career-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 0.6em;
+  color: #62a6f7;
+  letter-spacing: 0.03em;
+  border-bottom: 2px solid #23282e;
+  padding-bottom: 0.4em;
+  text-align: left;
+}
+.about-right ul {
+  padding-left: 2em;
+  margin: 0;
+  text-align: left;
+  line-height: 2.1;
+}
+.about-right li {
+  margin-bottom: 0.5em;
+  line-height: 1.7;
+  font-size: 1.08em;
+}
+.highlight-paren {
+  color: #e5c39a;
+  font-weight: bold;
+  margin: 0 0.1em;
+}
+
+/* =============================
+   9. RWD 響應式
+   ============================= */
+@media (max-width: 600px) {
+  .avatar {
+    width: 96px;
+    height: 96px;
+  }
+}
+@media (max-width: 900px) {
+  .about-content {
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 95vw;
+  }
+  .about-left, .about-right {
+    max-width: 99vw;
+  }
+}
