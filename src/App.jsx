@@ -13,6 +13,65 @@ export default function App() {
   const { t, i18n } = useTranslation();
   const [page, setPage] = useState("home");
   const [message, setMessage] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [isPublic, setIsPublic] = useState(true);
+  // === 新增 ===
+  const [publicMessages, setPublicMessages] = useState([]);
+  const [loadingMessages, setLoadingMessages] = useState(true);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!nickname.trim() || !message.trim()) {
+      alert("暱稱和留言內容都要填寫喔！");
+      return;
+    }
+    try {
+      const res = await fetch("http://localhost:8080/message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nickname,
+          content: message,
+          isPublic,
+        }),
+      });
+      if (res.ok) {
+        setMessage("");
+        setNickname("");
+        setIsPublic(true);
+        alert("留言送出成功！");
+        // 重新拉留言
+        setLoadingMessages(true);
+        fetch("http://localhost:8080/message/public")
+          .then(res => res.ok ? res.json() : [])
+          .then(data => {
+            if (Array.isArray(data)) setPublicMessages(data);
+            else setPublicMessages([]);
+          })
+          .catch(() => setPublicMessages([]))
+          .finally(() => setLoadingMessages(false));
+      } else {
+        alert("留言送出失敗！");
+      }
+    } catch (err) {
+      alert("留言送出失敗！");
+    }
+  };
+
+  // 取得留言資料
+  React.useEffect(() => {
+    if (page === "message") {
+      setLoadingMessages(true);
+      fetch("http://localhost:8080/message/public")
+        .then(res => res.ok ? res.json() : [])
+        .then(data => {
+          if (Array.isArray(data)) setPublicMessages(data);
+          else setPublicMessages([]);
+        })
+        .catch(() => setPublicMessages([]))
+        .finally(() => setLoadingMessages(false));
+    }
+  }, [page]); // 每次切到 message 頁面都會 fetch
 
   const allProjects = [
     {
@@ -234,10 +293,16 @@ export default function App() {
           <section className="about-section" id="message">
             <h2>{t("message_title")}</h2>
             <div className="message-container">
-              <div className="message-form">
+              <form className="message-form" onSubmit={handleSubmit}>
                 <label>
                   {t("message_nickname")}:
-                  <input type="text" placeholder={t("message_nickname_placeholder")} className="message-input" />
+                  <input
+                    type="text"
+                    placeholder={t("message_nickname_placeholder")}
+                    className="message-input"
+                    value={nickname}
+                    onChange={e => setNickname(e.target.value)}
+                  />
                 </label>
                 <label>
                   {t("message_content")}:
@@ -248,52 +313,40 @@ export default function App() {
                       rows={6}
                       placeholder={t("message_content_placeholder")}
                       value={message}
-                      onChange={(e) => setMessage(e.target.value)}
+                      onChange={e => setMessage(e.target.value)}
                     />
                   </div>
                 </label>
                 <div className="message-toggle">
                   <span>{t("message_public")}</span>
                   <label className="toggle-switch">
-                    <input type="checkbox" id="toggleVisibility" />
+                    <input
+                      type="checkbox"
+                      id="toggleVisibility"
+                      checked={isPublic}
+                      onChange={e => setIsPublic(e.target.checked)}
+                    />
                     <span className="slider"></span>
                   </label>
                 </div>
-                <button className="message-submit">{t("message_submit")}</button>
-              </div>
+                <button className="message-submit" type="submit">{t("message_submit")}</button>
+              </form>
               <div className="message-messages">
                 <h3>{t("message_list_title")}</h3>
                 <div className="messages-scroll">
-                  <div className="message-card">
-                    <p><strong>{t("message_anonymous")}</strong>: こんにちは！素敵なサイトですね！</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>someone</strong>: Javaのプロジェクト見ました、参考になります。</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>Yuki</strong>: Sawaさんの技術ブログ、分かりやすいです！</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>小林</strong>: 很棒的作品！加油！</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>John</strong>: Your project looks cool!</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>美咲</strong>: Reactのサンプルが役に立ちました！</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>Takashi</strong>: Spring Bootの実装参考になりました。</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>小王</strong>: 想請問怎麼串接MyBatis？</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>Anna</strong>: UI好美，想學習看看</p>
-                  </div>
-                  <div className="message-card">
-                    <p><strong>健太</strong>: お疲れ様です！これからも応援します！</p>
-                  </div>
+                  {loadingMessages ? (
+                    <div style={{ color: "#aaa", textAlign: "center", padding: "1em" }}>留言載入中...</div>
+                  ) : Array.isArray(publicMessages) && publicMessages.length > 0 ? (
+                    publicMessages.map((msg, idx) => (
+                      <div className="message-card" key={idx}>
+                        <p>
+                          <strong>{msg.nickname || t("message_anonymous")}</strong>: {msg.content}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <div style={{ color: "#aaa", textAlign: "center", padding: "1em" }}>目前沒有留言，快來搶頭香！</div>
+                  )}
                 </div>
               </div>
             </div>
