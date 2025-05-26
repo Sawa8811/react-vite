@@ -224,20 +224,22 @@ export default function App() {
                   <div className="career-title">{t("career_education_work")}</div>
                   <ul>
                     <li>
-                      2018年 台湾桃園陽明高校 卒業
+                      {t("career_item_2018")}
                     </li>
                     <li>
-                      2022年 芝浦工業大学
-                      <span className="highlight-paren">（機械制御システム学科）</span>
-                      卒業
+                      {t("career_item_2022_part1")}
+                      {i18n.language === "en" && <br />}
+                      <span className="highlight-paren">{t("career_item_2022_part2")}</span>
+                      {t("career_item_2022_part3")}
                     </li>
                     <li>
-                      2025年 芝浦工業大学大学院
-                      <span className="highlight-paren">（量子情報システム研究室）</span>
-                      修了
+                      {t("career_item_2025_masters_part1")}
+                      {i18n.language === "en" && <br />}
+                      <span className="highlight-paren">{t("career_item_2025_masters_part2")}</span>
+                      {t("career_item_2025_masters_part3")}
                     </li>
                     <li>
-                      2025年〜 株式会社ユタカ Javaエンジニア
+                      {t("career_item_2025_work")}
                     </li>
                   </ul>
                 </div>
@@ -245,10 +247,10 @@ export default function App() {
                 <div className="career-block">
                   <div className="career-title">{t("career_certifications_skills")}</div>
                   <ul>
-                    <li>TOEIC 600</li>
+                    <li>{t("career_cert_toeic")}</li>
                     <li>
-                      日本語能力試験N2
-                      <span className="highlight-paren">（現在はN1レベル）</span>
+                      {t("career_cert_japanese_part1")}
+                      <span className="highlight-paren">{t("career_cert_japanese_part2")}</span>
                     </li>
                   </ul>
                 </div>
