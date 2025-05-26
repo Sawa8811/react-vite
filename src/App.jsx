@@ -347,7 +347,7 @@ export default function App() {
                       </div>
                     ))
                   ) : (
-                    <div style={{ color: "#aaa", textAlign: "center", padding: "1em" }}>目前沒有留言，快來搶頭香！</div>
+                    <div style={{ color: "#aaa", textAlign: "center", padding: "1em" }}>目前沒有留言</div>
                   )}
                 </div>
               </div>
