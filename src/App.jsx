@@ -78,7 +78,15 @@ export default function App() {
       title: "UserLogin",
       desc: "使用者登入システム",
       tags: ["Spring-Boot", "Thymeleaf", "MyBatis-Plus", "MySQL", "Java"],
-      url: "https://github.com/Sawa8811/UserLogin"
+      url: "https://github.com/Sawa8811/UserLogin",
+      image: "/userLogin.png"
+    },
+    {
+      title: "Student Management System",
+      desc: "学生管理システム",
+      tags: ["Spring-Boot", "Thymeleaf", "MyBatis", "MySQL", "Java"],
+      url: "https://github.com/Sawa8811/student_Manage",
+      image: "/Student-Management.png"
     },
     /*
       可以在這邊新增專案
@@ -275,9 +283,9 @@ export default function App() {
                   <h3>{project.title}</h3>
                   <p>{project.desc}</p>
                   <img
-                    src={project.image || "/userLogin.png"}
-                    alt={`${project.title} UserLogin`}
-                    className="userLogin-image"
+                    src={project.image}
+                    alt={`${project.title}`}
+                    className="project-image"
                   />
                   <div className="tech-tags">
                     {project.tags.map(tag => (
